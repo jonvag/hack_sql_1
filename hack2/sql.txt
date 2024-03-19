@@ -1,0 +1,4 @@
+insert into countries (name) values ('Argentina'), ('Colombia'), ('Chile');
+
+
+select * from countries

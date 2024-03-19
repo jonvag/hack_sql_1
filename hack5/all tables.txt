@@ -1,0 +1,133 @@
+create table countries(
+  id_country serial primary key,
+  name varchar(50) not null  
+);
+
+create table priorities(
+  id_priority serial primary key,
+  type_name varchar(50) not null  
+);
+
+create table contact_request(
+ id_email serial primary key,
+ id_country integer not null,
+ id_priority integer not null,
+ NAME varchar(100) not null,
+ detail varchar (50) ,
+ physical_address VARCHAR (5),
+ foreign key (id_country) references countries (id_country),
+  foreign key (id_priority) references priorities (id_priority) 
+);
+
+
+
+select * from countries;
+--insert into countries (name)  values ('España'), ('Portugal');
+
+
+
+design ecommerce database
+
+tables:
+- table countries
+- table roles
+create table roles(
+  id_role serial primary key,
+  name varchar(50) not null  
+);
+
+- table taxes
+create table taxes(
+  id_tax serial primary key,
+  percentage integer not null  
+);
+
+- table offers
+create table offers(
+  id_offer serial primary key,
+  status INTEGER not null  
+);
+
+- table discounts
+create table discounts(
+  id_discount serial primary key,
+  status varchar(50) not null  ,
+  percentage INTEGER not null 
+);
+
+- table payments
+create table payments(
+  id_payment serial primary key,
+  type varchar(50) not null  
+);
+
+-- table customers
+create table customers(
+  id_customer serial primary key,
+  email varchar(30) unique not null,
+  id_country INTEGER not null,
+  id_role INTEGER not null,
+  name varchar(30) not null,
+  age INTEGER not null,
+  password varchar(30) not null,
+  physical_address varchar(50) not null,
+  foreign key (id_role) references roles (id_role),
+  foreign key (id_country) references countries (id_country) 
+);
+
+- table invoice_status
+create table invoice_status(
+  id_invoice_status serial primary key,
+  status varchar(50) not null 
+);
+
+- table products
+create table products(
+  id_product serial primary key,
+  id_discount integer not null  ,
+  id_offer integer not null,
+  id_tax integer not null,
+  name varchar(30) not null,
+  details varchar(50) not null,
+  minimum_stock integer not null,
+  maximun_stock integer not null,
+  current_stock integer not null,
+  price NUMERIC(10,2),
+  price_with_tax NUMERIC(10,2),
+  foreign key (id_discount) references discounts (id_discount),
+  foreign key (id_offer) references offers (id_offer),
+  foreign key (id_tax) references taxes (id_tax) 
+);
+
+- table product_customers
+create table product_customers(
+  id_product integer not null,
+  id_customer INTEGER not null,
+  foreign key (id_product) references products (id_product),
+  foreign key (id_customer) references customers (id_customer) 
+);
+
+- table invoices
+create table invoices(
+  id_invoice serial primary key,
+  id_customer INTEGER,
+  id_payment INTEGER,
+  id_invoice_status INTEGER,
+  date date,
+  total_to_pay  NUMERIC(10,2),
+  foreign key (id_invoice_status) references invoice_status (id_invoice_status),
+  foreign key (id_customer) references customers (id_customer),
+  foreign key (id_payment) references payments (id_payment)
+);
+
+- table orders
+create table orders(
+  id_order serial primary key,
+  id_invoice INTEGER not NULL,
+  id_product INTEGER not NULL,
+  detail varchar(50),
+  amount integer,
+  price NUMERIC,
+  foreign key (id_invoice) references invoices (id_invoice),
+  foreign key (id_product) references products (id_product)
+);

@@ -1,0 +1,51 @@
+tables:
+- table countries
+
+- table roles
+INSERT INTO roles (id_role,NAME) VALUES 
+(1, 'Administrador'),
+(2, 'Cliente'),
+(3, 'Vendedor')
+
+- table taxes
+INSERT INTO taxes (id_tax,percentage) VALUES 
+(1, 14),
+(2, 10),
+(3, 5)
+
+- table offers
+INSERT INTO offers (id_offer, status) VALUES 
+(1, 'rebaja'),
+(2, 'descuento'),
+(3, 'remate')
+
+- table discounts
+INSERT INTO discounts (id_discount, status, percentage) VALUES 
+(1, 'descuento 10%', 10),
+(2, 'descuento 20%', 20),
+(3, 'descuento 30%', 30)
+
+- table payments
+INSERT INTO payments (id_payment, type) VALUES 
+(1, 'credito'),
+(2, 'efectivo'),
+(3, 'divisa')
+
+- table customers
+INSERT INTO customers (id_customer, email, id_country, id_role, name, age, password, physical_address) VALUES 
+(1, 'Jon.apiscope@gmai.com', 2, 3, 'jon', 27, '12345678', 'Caracas'),
+(2, 'Ramon.perez@gmai.com', 1, 3, 'ramon', 40, '12345678', 'Valencia'),
+(3, 'Luis.guzmanpiscope@gmai.com', 2, 3, 'luis', 30, '12345678', 'Petare')
+
+- table invoice_status
+INSERT INTO invoice_status (id_invoice_status, status) VALUES 
+(1, 'PENDIENTE'),
+(2, 'PAGADO'),
+(3, 'CANCELADO')
+
+- table products
+INSERT INTO products (id_product, id_discount, id_offer, id_tax, name, details, minimum_stock, maximun_stock, current_stock, price, price_with_tax) VALUES 
+(1, 1, 2, 2, 'Zapatos', 'Nike', 5, 30, 20, 200.5, 220.10),
+(2, 1, 2, 2, 'Camisa', 'Nike', 5, 30, 20, 19.5, 22.10),
+(3, 1, 2, 2, 'Pantalon', 'Levis', 5, 30, 20, 50.5, 55.10)
+
